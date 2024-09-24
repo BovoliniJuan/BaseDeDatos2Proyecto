@@ -1,0 +1,25 @@
+### Tablero de comando
+
+El tablero está destinado a la organización y exposición de información, acerca del rendimiento de una empresa de outsourcing de IT. 
+Esta empresa que ofrece su servicio de soporte técnico, necesita un tablero para:
+
+- mostrar la demanda de cada empresa, es decir, la cantidad de tickets que envian.
+- la cantidad de tickets resueltos y no resueltos.
+- la velocidad con la que se resuelven los tickets.
+- la cantidad de tickets que tomó cada trabajador y la velocidad con la que respondió/resolvió.
+
+### Indicadores
+
+- Cantidad de tickets recibidos por empresa
+- Cantidad de tickets contestados por empresa
+- Cantidad de tickets por empresa y area
+- Tiempo de demora en responder tickets
+- Cantidad de tickets contestados por empleado
+- Tiempo de demora de empleados en responder tickes
+
+### Pantallas del tablero
+
+- Empresas
+- Empresas + areas
+- Empleados
+- Empresas + localidades
