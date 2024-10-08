@@ -1,6 +1,6 @@
 // import logo from './logo.svg';
 import './App.css';
-import Login from './login'; // Importa el componente Login
+import Login from './components/login'; // Importa el componente Login
 
 function App() {
   return (
