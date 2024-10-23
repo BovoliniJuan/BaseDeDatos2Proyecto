@@ -1,12 +1,17 @@
 // import logo from './logo.svg';
 import './App.css';
-import Login from './components/login'; // Importa el componente Login
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Login from './components/login'; 
+import Home from './components/home'; 
 
 function App() {
   return (
-    <div className="App">
-      <Login /> {/* Muestra el componente Login */}
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Login />} />   {/* Aquí estás usando Route */}
+        <Route path="/home" element={<Home />} /> {/* Aquí también */}
+      </Routes>
+    </Router>
   );
 }
 

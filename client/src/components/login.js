@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const [usuario, setUsuario] = useState('');
     const [clave, setClave] = useState('');
     const [message, setMessage] = useState('');
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -22,12 +22,12 @@ const Login = () => {
         });
 
         const data = await response.json();
-        setMessage(data.message);
         
-        // if (response.success) {
-        //     // Redirigir al menú principal
-        //     navigate('/menu');
-        // }
+        if (data.success) {
+            navigate('/home');
+        }else{
+            setMessage(data.message);
+        }
     };
 
     return (
