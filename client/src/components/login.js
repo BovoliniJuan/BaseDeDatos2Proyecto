@@ -32,6 +32,7 @@ const Login = () => {
 
     return (
         <form onSubmit={handleLogin} style={styles.form}>
+            <h1>Ingreso</h1>
             <div style={styles.inputContainer}>          
                 <input
                     type="text"
