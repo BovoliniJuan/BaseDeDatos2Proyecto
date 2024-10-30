@@ -10,16 +10,16 @@ import {
 } from "../ui/table"
 import SemaforoDoble from '../semaforoDoble';
 
-const TablaTickets = () => {
+const TablaEmpresasTickets = () => {
 const [tickets, setTickets] = useState([]);
 
 const url = new URL(window.location.href);
-const empresaEncoded = url.searchParams.get('empresa');
-const empresa = empresaEncoded ? empresaEncoded : '';
+const empresa = url.searchParams.get('empresa');
+const area = url.searchParams.get('area');
 
     useEffect(() => {
     // Hacer una solicitud para obtener los datos desde el archivo PHP
-    fetch(`http://localhost:9000/backend/Tickets/infoTickets.php`)
+    fetch(`http://localhost:9000/backend/Empresas/infoEmpresas.php?empresa=${empresa}&area=${area}`)
         .then(response => response.json())
         .then(data => setTickets(data))
         .catch(error => console.error('Error al obtener los datos:', error));
@@ -27,24 +27,21 @@ const empresa = empresaEncoded ? empresaEncoded : '';
 
     return (
         <Table>
-        <TableCaption>Tickets</TableCaption>
+        <TableCaption>Tickets + Area + Empresa</TableCaption>
         <TableHeader>
             <TableRow>
-            <TableHead className="w-[100px]">Nro. Ticket</TableHead>
-            <TableHead>Area</TableHead>
-            <TableHead>Empresa</TableHead>
+            <TableHead>Nro. Ticket</TableHead>
             <TableHead>Abierto</TableHead>
+            <TableHead>Resuelto</TableHead>
             <TableHead>Fecha</TableHead>
-            <TableHead>Ver</TableHead>
             </TableRow>
         </TableHeader>
         <TableBody>
             {tickets.map((ticket) => (
             <TableRow key={ticket.nro_ticket}>
                 <TableCell >{ticket.nro_ticket}</TableCell>
-                <TableCell>{ticket.area}</TableCell>
-                <TableCell>{ticket.empresa}</TableCell>
                 <TableCell><SemaforoDoble status={parseInt(ticket.abierto)} /></TableCell>
+                <TableCell><SemaforoDoble status={parseInt(ticket.resuelto)} /></TableCell>
                 <TableCell>{ticket.fecha}</TableCell>
             </TableRow>
             ))}
@@ -53,4 +50,4 @@ const empresa = empresaEncoded ? empresaEncoded : '';
     );
 };
   
-export default TablaTickets;
+export default TablaEmpresasTickets;

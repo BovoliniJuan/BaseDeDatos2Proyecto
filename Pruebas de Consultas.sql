@@ -40,8 +40,7 @@ WHERE
 SELECT t.id AS nro_ticket, e.nombre AS empresa, a.nombre_area AS area, t.fecha_envio AS fecha, t.abierto
 FROM tickets t
 JOIN empresas e ON t.id_empresa = e.id
-JOIN areas a ON t.id_area = a.id
-WHERE t.id_empleado = :id_empleado;
+JOIN areas a ON t.id_area = a.id;
 
 
 -- Para ver todos los tickets 
@@ -62,16 +61,11 @@ ORDER BY
 
 -- Para ver Empresas y sus tickets
 SELECT 
-    emp.nombre AS Empresa,
-    loc.nombre AS Localidad,
-    COUNT(t.id) AS CantidadTickets,
-    SUM(CASE WHEN t.abierto = 1 THEN 1 ELSE 0 END) AS Abiertos,
-    SUM(CASE WHEN tr.resuelto = 'Y' THEN 1 ELSE 0 END) AS Resueltos,
-    CASE 
-        WHEN SUM(CASE WHEN t.abierto = 1 THEN 1 ELSE 0 END) = 0 THEN '🟢' -- Verde si no hay tickets abiertos
-        WHEN SUM(CASE WHEN t.abierto = 1 THEN 1 ELSE 0 END) <= 5 THEN '🟡' -- Amarillo si hay entre 1 y 5 tickets abiertos
-        ELSE '🔴' -- Rojo si hay más de 5 tickets abiertos
-    END AS Estado
+    emp.nombre AS empresa,
+    loc.nombre AS localidad,
+    COUNT(t.id) AS cantidadTickets,
+    SUM(CASE WHEN t.abierto = 1 THEN 1 ELSE 0 END) AS abiertos,
+    SUM(CASE WHEN tr.resuelto = 'Y' THEN 1 ELSE 0 END) AS resueltos
 FROM 
     empresas emp
 JOIN 
@@ -82,7 +76,6 @@ LEFT JOIN
     tickets_respuestas tr ON t.id = tr.id_ticket
 GROUP BY 
     emp.nombre, loc.nombre;
-
 
 -- Para ver los tickets de una empresa 
 SELECT 

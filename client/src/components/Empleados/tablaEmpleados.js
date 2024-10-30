@@ -5,7 +5,7 @@ const TablaEmpleados = () => {
 
   useEffect(() => {
     // Hacer una solicitud para obtener los datos desde el archivo PHP
-    fetch('http://localhost:9000/backend/infoEmpleados.php')
+    fetch('http://localhost:9000/backend/Empleados/infoEmpleados.php')
       .then(response => response.json())
       .then(data => setEmpleados(data))
       .catch(error => console.error('Error al obtener los datos:', error));
