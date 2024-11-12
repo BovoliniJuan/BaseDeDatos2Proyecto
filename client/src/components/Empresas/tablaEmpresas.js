@@ -10,6 +10,7 @@ import {
     TableRow,
 } from "../ui/table"
 import SemaforoTriple from '../semaforoTriple';
+import Titulo from '../title';
 
 const TablaEmpresas = () => {
 const [empresas, setEmpresas] = useState([]);
@@ -30,32 +31,47 @@ const navigate = useNavigate();
 
 
     return (
-        <Table>
-        <TableCaption>Empresas</TableCaption>
-        <TableHeader>
-            <TableRow>
-            <TableHead>Empresa</TableHead>
-            <TableHead>Localidad</TableHead>
-            <TableHead>Cantidad Tickets</TableHead>
-            <TableHead>Abierto</TableHead>
-            <TableHead>Resueltos</TableHead>
-            <TableHead>Estado</TableHead>
-            </TableRow>
-        </TableHeader>
-        <TableBody>
-            {empresas.map((empresa) => (
-            <TableRow>
-                <TableCell onClick={() => redireccionAreas(empresa.id)}>{empresa.empresa}</TableCell>
-                <TableCell>{empresa.localidad}</TableCell>
-                <TableCell>{empresa.cantidadTickets}</TableCell>
-                <TableCell>{empresa.abiertos}</TableCell>
-                <TableCell>{empresa.resueltos}</TableCell>
-                <TableCell><SemaforoTriple total={parseInt(empresa.cantidadTickets)} abiertos={parseInt(empresa.abiertos)} resueltos={parseInt(empresa.resueltos)}/></TableCell>
-            </TableRow>
-            ))}
-        </TableBody>
-        </Table>
+        <>
+            <Titulo titulo="Información de Tickets por Empresa" />
+            <Table>
+            <TableCaption>Empresas</TableCaption>
+            <TableHeader style={styles.tableHeader}>
+                <TableRow>
+                    <TableHead style={styles.tableHead}>Empresa</TableHead>
+                    <TableHead style={styles.tableHead}>Localidad</TableHead>
+                    <TableHead style={styles.tableHead}>Cantidad Tickets</TableHead>
+                    <TableHead style={styles.tableHead}>Abierto</TableHead>
+                    <TableHead style={styles.tableHead}>Resueltos</TableHead>
+                    <TableHead style={styles.tableHead}>Estado</TableHead>
+                </TableRow>
+            </TableHeader>
+            <TableBody>
+                {empresas.map((empresa) => (
+                <TableRow>
+                    <TableCell style={styles.selector} onClick={() => redireccionAreas(empresa.id)}>{empresa.empresa}</TableCell>
+                    <TableCell>{empresa.localidad}</TableCell>
+                    <TableCell>{empresa.cantidadTickets}</TableCell>
+                    <TableCell>{empresa.abiertos}</TableCell>
+                    <TableCell>{empresa.resueltos}</TableCell>
+                    <TableCell><SemaforoTriple total={parseInt(empresa.cantidadTickets)} abiertos={parseInt(empresa.abiertos)} resueltos={parseInt(empresa.resueltos)}/></TableCell>
+                </TableRow>
+                ))}
+            </TableBody>
+            </Table>
+        </>
     );
 };
-  
+
+const styles = {
+    tableHeader: {
+        background: '#335c81',
+        pointerEvents: 'none',
+    },
+    tableHead: {
+        color: 'white',
+    },
+    selector: {
+        cursor: 'pointer',
+    }
+}
 export default TablaEmpresas;

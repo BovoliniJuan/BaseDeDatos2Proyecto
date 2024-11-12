@@ -25,15 +25,15 @@ const Login = () => {
         
         if (data.success) {
             navigate('/home');
-        }else{
+        } else {
             setMessage(data.message);
         }
     };
 
     return (
         <form onSubmit={handleLogin} style={styles.form}>
-            <h1>Ingreso</h1>
-            <div style={styles.inputContainer}>          
+            <div style={styles.boxContainer}>
+                <h1 style={styles.title}>Ingreso</h1>
                 <input
                     type="text"
                     placeholder="Usuario"
@@ -51,37 +51,59 @@ const Login = () => {
                     style={styles.input}
                 />
                 <button type="submit" style={styles.button}>Ingresar</button>
-            
-                {message && <p>{message}</p>}
+                {message && <p style={styles.message}>{message}</p>}
             </div>
         </form>
     );
 };
+
 const styles = {
     form: {
         display: 'flex',
         flexDirection: 'column',
-        width: '300px', // Ancho del formulario
-        margin: '250px auto', // Centrar el formulario
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: '100vh',
+        background: '#335c81',
     },
-    inputContainer: {
-        marginBottom: '15px', // Espacio entre inputs
+    title: {
+        marginBottom: '20px',
+        fontSize: '24px',
+        color: '#904e55',
+        fontWeight: 'bold',
+    },
+    boxContainer: {
+        width: '100%',
+        maxWidth: '400px',
+        padding: '20px',
+        backgroundColor: '#f9f9f9', // Fondo del contenedor
+        boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)', // Sombra
+        borderRadius: '8px', // Bordes redondeados
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
     },
     input: {
-        width: '100%', // Ancho completo del input
-        padding: '10px', // Espaciado interno del input
-        border: '1px solid #ccc', // Borde del input
-        borderRadius: '4px', // Bordes redondeados
-        margin: '10px'
+        width: '100%',
+        padding: '10px',
+        border: '1px solid #ccc',
+        borderRadius: '4px',
+        marginBottom: '15px',
     },
     button: {
+        width: '100%',
         padding: '10px',
-        backgroundColor: '#007BFF', // Color de fondo del botón
-        color: '#fff', // Color del texto del botón
+        backgroundColor: '#904e55',
+        color: '#fff',
         border: 'none',
         borderRadius: '4px',
         cursor: 'pointer',
-        margin: '10px'
+        marginTop: '10px',
+    },
+    message: {
+        color: 'red',
+        marginTop: '10px',
     },
 };
+
 export default Login;
