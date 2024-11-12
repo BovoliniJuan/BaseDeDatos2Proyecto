@@ -10,6 +10,7 @@ import {
     TableRow,
 } from "../ui/table"
 import SemaforoDoble from '../semaforoDoble';
+import Titulo from '../title';
 
 const TablaEmpleados = () => {
 const [empleados, setEmpleados] = useState([]);
@@ -30,32 +31,49 @@ const navigate = useNavigate();
 
 
     return (
-        <Table>
-        <TableCaption>Empleados</TableCaption>
-        <TableHeader>
-            <TableRow>
-            <TableHead>Id</TableHead>
-            <TableHead>Nombre</TableHead>
-            <TableHead>Apellido</TableHead>
-            <TableHead>DNI</TableHead>
-            <TableHead>Tickets contestados</TableHead>
-            <TableHead>Estado</TableHead>
-            </TableRow>
-        </TableHeader>
-        <TableBody>
-            {empleados.map((empleado) => (
-            <TableRow>
-                <TableCell onClick={() => redireccionTickets(empleado.id)}>{empleado.id}</TableCell>
-                <TableCell>{empleado.nombre}</TableCell>
-                <TableCell>{empleado.apellido}</TableCell>
-                <TableCell>{empleado.dni}</TableCell>
-                <TableCell>{empleado.cantidad_tickets_contestados}</TableCell>
-                <TableCell><SemaforoDoble status={parseInt(empleado.cantidad_tickets_contestados)}/></TableCell>
-            </TableRow>
-            ))}
-        </TableBody>
-        </Table>
+        <>
+            <Titulo titulo="Información de Tickets por Empleados" />
+            <Table>
+            <TableCaption>Empleados</TableCaption>
+            <TableHeader style={styles.tableHeader}>
+                <TableRow>
+                    <TableHead style={styles.tableHead}>Id</TableHead>
+                    <TableHead style={styles.tableHead}>Nombre</TableHead>
+                    <TableHead style={styles.tableHead}>Apellido</TableHead>
+                    <TableHead style={styles.tableHead}>DNI</TableHead>
+                    <TableHead style={styles.tableHead}>Tickets contestados</TableHead>
+                    <TableHead style={styles.tableHead}>Estado</TableHead>
+                </TableRow>
+            </TableHeader>
+            <TableBody>
+                {empleados.map((empleado) => (
+                <TableRow>
+                    <TableCell style={styles.selector} onClick={() => redireccionTickets(empleado.id)}>{empleado.id}</TableCell>
+                    <TableCell>{empleado.nombre}</TableCell>
+                    <TableCell>{empleado.apellido}</TableCell>
+                    <TableCell>{empleado.dni}</TableCell>
+                    <TableCell>{empleado.cantidad_tickets_contestados}</TableCell>
+                    <TableCell><SemaforoDoble status={parseInt(empleado.cantidad_tickets_contestados)}/></TableCell>
+                </TableRow>
+                ))}
+            </TableBody>
+            </Table>
+        </>
     );
 };
-  
+
+const styles = {
+    tableHeader: {
+        background: '#335c81',
+        pointerEvents: 'none',
+    },
+    tableHead: {
+        color: 'white',
+    },
+    selector: {
+        cursor: 'pointer',
+    }
+}
+
+
 export default TablaEmpleados;

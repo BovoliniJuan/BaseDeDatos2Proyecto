@@ -10,6 +10,7 @@ import {
     TableRow,
 } from "../ui/table"
 import SemaforoDoble from '../semaforoDoble';
+import Titulo from '../title';
 
 const TablaTickets = () => {
 const [tickets, setTickets] = useState([]);
@@ -35,31 +36,43 @@ const empresa = empresaEncoded ? empresaEncoded : '';
 
 
     return (
-        <Table>
-        <TableCaption>Tickets</TableCaption>
-        <TableHeader>
-            <TableRow>
-            <TableHead className="w-[100px]">Nro. Ticket</TableHead>
-            <TableHead>Area</TableHead>
-            <TableHead>Empresa</TableHead>
-            <TableHead>Abierto</TableHead>
-            <TableHead>Fecha</TableHead>
-            <TableHead>Ver</TableHead>
-            </TableRow>
-        </TableHeader>
-        <TableBody>
-            {tickets.map((ticket) => (
-            <TableRow key={ticket.nro_ticket}>
-                <TableCell >{ticket.nro_ticket}</TableCell>
-                <TableCell>{ticket.area}</TableCell>
-                <TableCell>{ticket.empresa}</TableCell>
-                <TableCell><SemaforoDoble status={parseInt(ticket.abierto)} /></TableCell>
-                <TableCell>{ticket.fecha}</TableCell>
-            </TableRow>
-            ))}
-        </TableBody>
-        </Table>
+        <>
+            <Titulo titulo="Información de todos los Tickets" />
+            <Table>
+            <TableCaption>Tickets</TableCaption>
+            <TableHeader style={styles.tableHeader}>
+                <TableRow>
+                    <TableHead style={styles.tableHead}>Nro. Ticket</TableHead>
+                    <TableHead style={styles.tableHead}>Area</TableHead>
+                    <TableHead style={styles.tableHead}>Empresa</TableHead>
+                    <TableHead style={styles.tableHead}>Abierto</TableHead>
+                    <TableHead style={styles.tableHead}>Fecha</TableHead>
+                </TableRow>
+            </TableHeader>
+            <TableBody>
+                {tickets.map((ticket) => (
+                <TableRow key={ticket.nro_ticket}>
+                    <TableCell >{ticket.nro_ticket}</TableCell>
+                    <TableCell>{ticket.area}</TableCell>
+                    <TableCell>{ticket.empresa}</TableCell>
+                    <TableCell><SemaforoDoble status={parseInt(ticket.abierto)} /></TableCell>
+                    <TableCell>{ticket.fecha}</TableCell>
+                </TableRow>
+                ))}
+            </TableBody>
+            </Table>
+        </>
     );
 };
   
+const styles = {
+    tableHeader: {
+        background: '#335c81',
+        pointerEvents: 'none',
+    },
+    tableHead: {
+        color: 'white',
+    }
+}
+
 export default TablaTickets;

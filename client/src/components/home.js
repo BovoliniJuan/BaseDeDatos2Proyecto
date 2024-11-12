@@ -4,8 +4,7 @@ import React from 'react';
 function Home() {
   return (
     <div style={styles.container}>
-      <h1>Bienvenido a la página principal</h1>
-      <p>Has iniciado sesión correctamente. ¡Disfruta de tu estancia!</p>
+      <h1>Bienvenido al tablero para Tickets</h1>
     </div>
   );
 }
