@@ -10,7 +10,9 @@ import {
     TableRow,
 } from "../ui/table"
 import SemaforoTriple from '../semaforoTriple';
+import { data } from 'autoprefixer';
 import Titulo from '../title';
+
 
 const TablaEmpresas = () => {
 const [empresas, setEmpresas] = useState([]);
@@ -20,9 +22,16 @@ const navigate = useNavigate();
     // Hacer una solicitud para obtener los datos desde el archivo PHP
     fetch('http://localhost:9000/backend/Empresas/infoEmpresas.php')
         .then(response => response.json())
-        .then(data => setEmpresas(data))
+        .then(data => {
+            if(!data.success){
+                navigate('/');
+            }
+            else{
+                setEmpresas(data);
+            }
+        })    
         .catch(error => console.error('Error al obtener los datos:', error));
-    }, []);
+    }, [navigate]);
 
 
     const redireccionAreas = (empresa) => {
