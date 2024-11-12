@@ -1,11 +1,24 @@
 // Home.js
-import React from 'react';
+import React, { useEffect } from 'react';
 import Titulo from './title';
 import { useNavigate } from 'react-router-dom';
+import { data } from 'autoprefixer';
 
 function Home() {
   const navigate = useNavigate();
+  useEffect(()=> {
+      fetch('http://localhost:9000/backend/home.php', {
+        credentials: 'include'})
 
+        .then(response => response.json())
+        .then(data => {
+          if(!data.success){
+            navigate('/');
+          }
+        })
+
+  }, [navigate]);
+  
   const redireccionTickets = () => {
     navigate(`/tablaTickets`);
   };

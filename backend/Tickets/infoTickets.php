@@ -7,7 +7,14 @@ include '../server.php';
 header('Content-Type: application/json');
 
 include '../connect.php';
+session_start();
+header("Access-Control-Allow-Origin: http://localhost:3000");
+header("Access-Control-Allow-Credentials: true");
 
+if (!isset($_SESSION['usuario'])) {
+    echo json_encode(['success' => false, 'message' => 'No autorizado']);
+    exit;
+}
 // Consulta para obtener los datos
 $sql = 
 "SELECT t.id AS nro_ticket, e.nombre AS empresa, a.nombre_area AS area, t.fecha_envio AS fecha, t.abierto AS abierto
