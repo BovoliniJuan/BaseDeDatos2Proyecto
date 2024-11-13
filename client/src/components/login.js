@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import { useAuth } from '../AuthContext';
 const Login = () => {
     const [usuario, setUsuario] = useState('');
     const [clave, setClave] = useState('');
     const [message, setMessage] = useState('');
     const navigate = useNavigate();
+    const { login } = useAuth();
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -24,6 +25,7 @@ const Login = () => {
         const data = await response.json();
         
         if (data.success) {
+            login();
             navigate('/home');
         } else {
             setMessage(data.message);
