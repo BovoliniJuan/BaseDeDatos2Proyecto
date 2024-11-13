@@ -18,6 +18,7 @@ const navigate = useNavigate();
 
 const url = new URL(window.location.href);
 const empresa = url.searchParams.get('empresa');
+const nombreEmpresa = atob(url.searchParams.get('nombre'));
 
     useEffect(() => {
     // Hacer una solicitud para obtener los datos desde el archivo PHP
@@ -27,15 +28,17 @@ const empresa = url.searchParams.get('empresa');
         .catch(error => console.error('Error al obtener los datos:', error));
     }, []);
 
-    const redireccionTickets = (area) => {
-        navigate(`./tablaEmpresasTickets?empresa=${empresa}&area=${(area)}`);
+    const redireccionTickets = (area, nombreArea) => {
+        navigate(`./tablaEmpresasTickets?empresa=${empresa}&area=${(area)}&nombreArea=${btoa(nombreArea)}&nombreEmpresa=${btoa(nombreEmpresa)}`);
       };
 
     return (
         <>
-            <Titulo titulo={`Información de Tickets de ${empresa}`} />
+            <Titulo titulo={`Información de Tickets de ${nombreEmpresa}`} />
             <Table>
-            <TableCaption>Tickets + Empresa</TableCaption>
+            <TableCaption>Rojo: menos de la mitad no fueron abiertos</TableCaption>
+            <TableCaption>Amarillo: mas de la mitad fueron abiertos pero no todos fueron resueltos</TableCaption>
+            <TableCaption>Verde: la mitad o mas fueron abiertos y todos estan resueltos</TableCaption>
             <TableHeader style={styles.tableHeader}>
                 <TableRow>
                     <TableHead style={styles.tableHead}>Area</TableHead>
@@ -49,7 +52,7 @@ const empresa = url.searchParams.get('empresa');
             <TableBody>
                 {tickets.map((ticket) => (
                 <TableRow key={ticket.empresa}>
-                    <TableCell style={styles.selector} onClick={() => redireccionTickets(ticket.id)}>{ticket.area}</TableCell>
+                    <TableCell style={styles.selector} onClick={() => redireccionTickets(ticket.id, ticket.area)}>{ticket.area}</TableCell>
                     <TableCell>{ticket.cantidad_tickets}</TableCell>
                     <TableCell>{ticket.cantidad_abiertos}</TableCell>
                     <TableCell>{ticket.cantidad_resueltos}</TableCell>

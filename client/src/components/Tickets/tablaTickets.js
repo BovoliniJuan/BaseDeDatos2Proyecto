@@ -16,30 +16,20 @@ const TablaTickets = () => {
 const [tickets, setTickets] = useState([]);
 const navigate = useNavigate(); // Importar useNavigate para redirección
 
-const url = new URL(window.location.href);
-const empresaEncoded = url.searchParams.get('empresa');
-const empresa = empresaEncoded ? empresaEncoded : '';
-
     useEffect(() => {
         // Hacer una solicitud para obtener los datos desde el archivo PHP
         fetch('http://localhost:9000/backend/Tickets/infoTickets.php')
-            .then(response => response.json())
-            .then(data => {
-                if (!data.success) {
-                    navigate('/');
-            }   else {
-                    setTickets(data);
-                }
-        })
+        .then(response => response.json())
+        .then(data => setTickets(data))
         .catch(error => console.error('Error al obtener los datos:', error));
-    }, [navigate]); 
+    }, []);
 
 
     return (
         <>
             <Titulo titulo="Información de todos los Tickets" />
             <Table>
-            <TableCaption>Tickets</TableCaption>
+            <TableCaption>Verde: Abierto - Rojo: No abierto</TableCaption>
             <TableHeader style={styles.tableHeader}>
                 <TableRow>
                     <TableHead style={styles.tableHead}>Nro. Ticket</TableHead>

@@ -13,7 +13,7 @@ const SemaforoTriple = ({ total, abiertos, resueltos }) => {
     if(medioTotal > abiertos){
         color = 'red';
     }
-    if(medioTotal < abiertos && diferencia == 0){
+    if(medioTotal <= abiertos && diferencia == 0){
         color = 'green';
     }
 

@@ -10,7 +10,6 @@ import {
     TableRow,
 } from "../ui/table"
 import SemaforoTriple from '../semaforoTriple';
-import { data } from 'autoprefixer';
 import Titulo from '../title';
 
 
@@ -22,20 +21,13 @@ const navigate = useNavigate();
     // Hacer una solicitud para obtener los datos desde el archivo PHP
     fetch('http://localhost:9000/backend/Empresas/infoEmpresas.php')
         .then(response => response.json())
-        .then(data => {
-            if(!data.success){
-                navigate('/');
-            }
-            else{
-                setEmpresas(data);
-            }
-        })    
+        .then(data => setEmpresas(data))
         .catch(error => console.error('Error al obtener los datos:', error));
-    }, [navigate]);
+    }, []);
 
 
-    const redireccionAreas = (empresa) => {
-      navigate(`./tablaEmpresasAreas?empresa=${(empresa)}`);
+    const redireccionAreas = (empresa, nombre) => {
+      navigate(`./tablaEmpresasAreas?empresa=${(empresa)}&nombre=${btoa(nombre)}`);
     };
 
 
@@ -43,7 +35,9 @@ const navigate = useNavigate();
         <>
             <Titulo titulo="Información de Tickets por Empresa" />
             <Table>
-            <TableCaption>Empresas</TableCaption>
+            <TableCaption>Rojo: menos de la mitad no fueron abiertos</TableCaption>
+            <TableCaption>Amarillo: mas de la mitad fueron abiertos pero no todos fueron resueltos</TableCaption>
+            <TableCaption>Verde: la mitad o mas fueron abiertos y todos estan resueltos</TableCaption>
             <TableHeader style={styles.tableHeader}>
                 <TableRow>
                     <TableHead style={styles.tableHead}>Empresa</TableHead>
@@ -57,7 +51,7 @@ const navigate = useNavigate();
             <TableBody>
                 {empresas.map((empresa) => (
                 <TableRow>
-                    <TableCell style={styles.selector} onClick={() => redireccionAreas(empresa.id)}>{empresa.empresa}</TableCell>
+                    <TableCell style={styles.selector} onClick={() => redireccionAreas(empresa.id, empresa.empresa)}>{empresa.empresa}</TableCell>
                     <TableCell>{empresa.localidad}</TableCell>
                     <TableCell>{empresa.cantidadTickets}</TableCell>
                     <TableCell>{empresa.abiertos}</TableCell>

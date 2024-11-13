@@ -17,6 +17,8 @@ const [tickets, setTickets] = useState([]);
 const url = new URL(window.location.href);
 const empresa = url.searchParams.get('empresa');
 const area = url.searchParams.get('area');
+const nombreEmpresa = atob(url.searchParams.get('nombreEmpresa'));
+const nombreArea = atob(url.searchParams.get('nombreArea'));
 
     useEffect(() => {
     // Hacer una solicitud para obtener los datos desde el archivo PHP
@@ -28,9 +30,9 @@ const area = url.searchParams.get('area');
 
     return (
         <>
-            <Titulo titulo={`Información de Tickets de ${empresa} del area ${area}`} />
+            <Titulo titulo={`Información de Tickets de ${nombreEmpresa} del area ${nombreArea}`} />
             <Table>
-            <TableCaption>Tickets + Area + Empresa</TableCaption>
+            <TableCaption>Rojo: NO - Verde: SI</TableCaption>
             <TableHeader style={styles.tableHeader}>
                 <TableRow>
                     <TableHead style={styles.tableHead}>Nro. Ticket</TableHead>

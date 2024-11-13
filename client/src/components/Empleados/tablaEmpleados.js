@@ -25,8 +25,8 @@ const navigate = useNavigate();
     }, []);
 
 
-    const redireccionTickets = (empleado) => {
-      navigate(`./tablaEmpleadoUnico?empleado=${(empleado)}`);
+    const redireccionTickets = (empleado, nombre) => {
+      navigate(`./tablaEmpleadoUnico?empleado=${(empleado)}&nombre=${btoa(nombre)}`);
     };
 
 
@@ -34,7 +34,8 @@ const navigate = useNavigate();
         <>
             <Titulo titulo="Información de Tickets por Empleados" />
             <Table>
-            <TableCaption>Empleados</TableCaption>
+            <TableCaption>Rojo: menos de la mitad fueron contestados</TableCaption>
+            <TableCaption>Verde: mas de la mitad fueron contestados</TableCaption>
             <TableHeader style={styles.tableHeader}>
                 <TableRow>
                     <TableHead style={styles.tableHead}>Id</TableHead>
@@ -48,7 +49,7 @@ const navigate = useNavigate();
             <TableBody>
                 {empleados.map((empleado) => (
                 <TableRow>
-                    <TableCell style={styles.selector} onClick={() => redireccionTickets(empleado.id)}>{empleado.id}</TableCell>
+                    <TableCell style={styles.selector} onClick={() => redireccionTickets(empleado.id, empleado.nombre)}>{empleado.id}</TableCell>
                     <TableCell>{empleado.nombre}</TableCell>
                     <TableCell>{empleado.apellido}</TableCell>
                     <TableCell>{empleado.dni}</TableCell>
