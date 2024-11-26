@@ -11,6 +11,7 @@ import {
 } from "../ui/table"
 import SemaforoTriple from '../semaforoTriple';
 import Titulo from '../title';
+import TopMenu from '../barra';
 
 const TablaEmpresasAreas = () => {
 const [tickets, setTickets] = useState([]);
@@ -34,6 +35,7 @@ const nombreEmpresa = atob(url.searchParams.get('nombre'));
 
     return (
         <>
+            <TopMenu />
             <Titulo titulo={`Información de Tickets de ${nombreEmpresa}`} />
             <Table>
             <TableCaption>Rojo: menos de la mitad no fueron abiertos</TableCaption>

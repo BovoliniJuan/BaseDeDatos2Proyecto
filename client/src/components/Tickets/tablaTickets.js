@@ -11,10 +11,10 @@ import {
 } from "../ui/table"
 import SemaforoDoble from '../semaforoDoble';
 import Titulo from '../title';
+import TopMenu from '../barra';
 
 const TablaTickets = () => {
 const [tickets, setTickets] = useState([]);
-const navigate = useNavigate(); // Importar useNavigate para redirección
 
     useEffect(() => {
         // Hacer una solicitud para obtener los datos desde el archivo PHP
@@ -27,6 +27,7 @@ const navigate = useNavigate(); // Importar useNavigate para redirección
 
     return (
         <>
+            <TopMenu />
             <Titulo titulo="Información de todos los Tickets" />
             <Table>
             <TableCaption>Verde: Abierto - Rojo: No abierto</TableCaption>

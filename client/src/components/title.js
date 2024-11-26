@@ -7,7 +7,7 @@ const Titulo = ({ titulo }) => {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            height: '20vh',
+            height: '25vh',
         },
         titulo:{
             color: '#335c81',

@@ -11,6 +11,7 @@ import {
 } from "../ui/table"
 import SemaforoDoble from '../semaforoDoble';
 import Titulo from '../title';
+import TopMenu from '../barra';
 
 const TablaEmpleados = () => {
 const [empleados, setEmpleados] = useState([]);
@@ -32,6 +33,7 @@ const navigate = useNavigate();
 
     return (
         <>
+            <TopMenu />
             <Titulo titulo="Información de Tickets por Empleados" />
             <Table>
             <TableCaption>Rojo: menos de la mitad fueron contestados</TableCaption>

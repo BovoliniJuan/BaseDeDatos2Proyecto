@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-
 import {
     Table,
     TableBody,
@@ -11,6 +10,7 @@ import {
 } from "../ui/table"
 import SemaforoDoble from '../semaforoDoble';
 import Titulo from '../title';
+import TopMenu from '../barra';
 
 const TablaEmpleadoUnico = () => {
 const [tickets, setTickets] = useState([]);
@@ -30,6 +30,7 @@ const nombreEmpleado = atob(url.searchParams.get('nombre'));
 
     return (
         <>
+            <TopMenu />
             <Titulo titulo={`Información de Tickets de ${nombreEmpleado}`} />
             <Table>
             <TableCaption>Rojo: No fue abierto - Verde: Si fue abierto</TableCaption>

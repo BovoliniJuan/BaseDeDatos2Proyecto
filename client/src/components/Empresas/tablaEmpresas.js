@@ -11,7 +11,7 @@ import {
 } from "../ui/table"
 import SemaforoTriple from '../semaforoTriple';
 import Titulo from '../title';
-
+import TopMenu from '../barra';
 
 const TablaEmpresas = () => {
 const [empresas, setEmpresas] = useState([]);
@@ -33,6 +33,7 @@ const navigate = useNavigate();
 
     return (
         <>
+            <TopMenu />
             <Titulo titulo="Información de Tickets por Empresa" />
             <Table>
             <TableCaption>Rojo: menos de la mitad no fueron abiertos</TableCaption>
